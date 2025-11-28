@@ -22,23 +22,23 @@ This project implements a **Proximal Gradient Descent (PGD)** algorithm to steer
 
 ## 🌟 Key Features
 
-* [cite_start]**Multi-Dimensional:** Fully supported solvers for both **1D** and **2D** domains[cite: 25].
+* **Multi-Dimensional:** Fully supported solvers for both **1D** and **2D** domains.
 * **Physics-Fidelity:**
-    * [cite_start]Models **Viscous** Cahn-Hilliard dynamics (inertial effects)[cite: 146].
-    * [cite_start]Uses the **Logarithmic Flory-Huggins potential** ensuring physical bounds ($-1 < \varphi < 1$)[cite: 165].
+    * Models **Viscous** Cahn-Hilliard dynamics (inertial effects).
+    * Uses the **Logarithmic Flory-Huggins potential** ensuring physical bounds ($-1 < \varphi < 1$).
 * **Robust Numerics:**
-    * [cite_start]**Forward Solver:** Semi-implicit Crank-Nicolson scheme with convex-concave splitting and monolithic Newton-Raphson iteration[cite: 349, 380].
-    * [cite_start]**Adjoint Solver:** Efficient backpropagation-through-time for exact gradient computation[cite: 498].
-* [cite_start]**Sparse Control:** Implements **Proximal Gradient Descent (ISTA)** to handle non-smooth $L^1$ regularization, promoting energy-efficient, sparse actuation[cite: 581].
-* [cite_start]**Interactive CLI:** User-friendly prompts to configure grid size, weights, targets, and time steps without touching code[cite: 25].
-* [cite_start]**Verification:** Includes automated checks for **KKT conditions** (first-order) and **Coercivity** (second-order sufficient conditions)[cite: 986].
+    * **Forward Solver:** Semi-implicit Crank-Nicolson scheme with convex-concave splitting and monolithic Newton-Raphson iteration.
+    * **Adjoint Solver:** Efficient backpropagation-through-time for exact gradient computation.
+* **Sparse Control:** Implements **Proximal Gradient Descent (ISTA)** to handle non-smooth $L^1$ regularization, promoting energy-efficient, sparse actuation.
+* **Interactive CLI:** User-friendly prompts to configure grid size, weights, targets, and time steps without touching code.
+* **Verification:** Includes automated checks for **KKT conditions** (first-order) and **Coercivity** (second-order sufficient conditions).
 
 ---
 
 ## 🧠 Mathematical Model
 
 ### 1. The State System
-We control the phase-field variable $\varphi$ and chemical potential $\mu$ via an external control $u$, filtered through an auxiliary variable $w$. [cite_start]As detailed in the project report[cite: 150]:
+We control the phase-field variable $\varphi$ and chemical potential $\mu$ via an external control $u$, filtered through an auxiliary variable $w$. As detailed in the project report:
 
 $$
 \begin{cases}
@@ -53,20 +53,20 @@ $$
 * $f'(\varphi)$: Derivative of the logarithmic double-well potential.
 
 ### 2. The Optimization Problem
-[cite_start]We minimize a cost functional $J(\varphi, u)$ composed of four terms[cite: 229]:
+We minimize a cost functional $J(\varphi, u)$ composed of four terms:
 
 $$
 \min_{u} J(\varphi, u) = \underbrace{\frac{b_1}{2} ||\varphi - \varphi_Q||_{L^2}^2}_{\text{Trajectory Tracking}} + \underbrace{\frac{b_2}{2} ||\varphi(T) - \varphi_\Omega||_{L^2}^2}_{\text{Terminal Target}} + \underbrace{\frac{b_3}{2} ||u||_{L^2}^2}_{\text{Control Energy}} + \underbrace{\kappa_{spar} ||u||_{L^1}}_{\text{Sparsity}}
 $$
 
-[cite_start]The non-differentiable $L^1$ term is handled via **Soft-Thresholding**, ensuring the control $u(x,t)$ is zero where actuation is not strictly necessary[cite: 598].
+The non-differentiable $L^1$ term is handled via **Soft-Thresholding**, ensuring the control $u(x,t)$ is zero where actuation is not strictly necessary.
 
 ---
 
 ## 🚀 Installation
 
 ### Prerequisites (Min)
-* [cite_start]Python 3.11+ [cite: 649]
+* Python 3.11+ 
 * RAM: ~4GB recommended for 2D simulations.
 
 ### Setup
@@ -105,3 +105,22 @@ python 1d/Vch_control_1D/GD_1D.py
 **To run the 2D Simulator:**
 ```bash
 python 1d/Vch_control_2D/GD2_configured.py
+```
+**Project Structure**
+Viscous_Cahn_Hilliard/
+├── 1d/
+│   └── Vch_control_1D/
+│       ├── GD_1D.py                 # Main 1D Driver
+│       ├── Forward_solver.py        # 1D Forward Solver (Newton-Raphson)
+│       ├── backward_solver.py       # 1D Adjoint Solver
+│       ├── cost_and_function.py     # Cost calculation
+│       └── ...
+├── 2d/
+│   └── Vch_control_2D/
+│       ├── GD2_configured.py        # Main 2D Driver
+│       ├── Forward2_solver.py       # 2D Forward Solver (Sparse Matrices)
+│       ├── backward2_solver.py      # 2D Adjoint Solver
+│       ├── visualization_3d.py      # 3D Plotting & Animation
+│       └── config.py                # Pydantic Configuration Models
+├── requirements.txt
+└── README.md
