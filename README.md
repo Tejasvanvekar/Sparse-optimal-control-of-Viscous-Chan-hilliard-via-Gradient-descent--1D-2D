@@ -1,0 +1,107 @@
+# Sparse Optimal Control of Viscous Cahn-Hilliard Systems
+
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python)
+![SciPy](https://img.shields.io/badge/SciPy-Sparse_Solvers-blue)
+![Status](https://img.shields.io/badge/Status-Active-success)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+A high-performance computational framework for solving **sparse optimal control problems** governed by the **Viscous Cahn-Hilliard (vCH)** equation with a logarithmic potential.
+
+This project implements a **Proximal Gradient Descent (PGD)** algorithm to steer phase separation processes. It features robust forward solvers (Newton-Raphson), adjoint-based gradient computation, and an interactive configuration system.
+
+---
+
+## 🎥 Demonstration
+
+| 1D Control Evolution | 2D Target Steering |
+|:--------------------:|:------------------:|
+| *[Place 1D GIF Here]* | *[Place 2D GIF Here]* |
+| *Steering a 1D profile to a sinusoid* | *Steering a random mixture to a central disk* |
+
+---
+
+## 🌟 Key Features
+
+* [cite_start]**Multi-Dimensional:** Fully supported solvers for both **1D** and **2D** domains[cite: 25].
+* **Physics-Fidelity:**
+    * [cite_start]Models **Viscous** Cahn-Hilliard dynamics (inertial effects)[cite: 146].
+    * [cite_start]Uses the **Logarithmic Flory-Huggins potential** ensuring physical bounds ($-1 < \varphi < 1$)[cite: 165].
+* **Robust Numerics:**
+    * [cite_start]**Forward Solver:** Semi-implicit Crank-Nicolson scheme with convex-concave splitting and monolithic Newton-Raphson iteration[cite: 349, 380].
+    * [cite_start]**Adjoint Solver:** Efficient backpropagation-through-time for exact gradient computation[cite: 498].
+* [cite_start]**Sparse Control:** Implements **Proximal Gradient Descent (ISTA)** to handle non-smooth $L^1$ regularization, promoting energy-efficient, sparse actuation[cite: 581].
+* [cite_start]**Interactive CLI:** User-friendly prompts to configure grid size, weights, targets, and time steps without touching code[cite: 25].
+* [cite_start]**Verification:** Includes automated checks for **KKT conditions** (first-order) and **Coercivity** (second-order sufficient conditions)[cite: 986].
+
+---
+
+## 🧠 Mathematical Model
+
+### 1. The State System
+We control the phase-field variable $\varphi$ and chemical potential $\mu$ via an external control $u$, filtered through an auxiliary variable $w$. [cite_start]As detailed in the project report[cite: 150]:
+
+$$
+\begin{cases}
+\partial_t \varphi - \Delta \mu = 0 \\
+\tau \partial_t \varphi - \kappa \Delta \varphi + f'(\varphi) = \mu + w \\
+\gamma \partial_t w + w = u
+\end{cases}
+$$
+
+* $\tau$: Viscosity/relaxation parameter.
+* $\kappa$: Gradient energy coefficient (interface width).
+* $f'(\varphi)$: Derivative of the logarithmic double-well potential.
+
+### 2. The Optimization Problem
+[cite_start]We minimize a cost functional $J(\varphi, u)$ composed of four terms[cite: 229]:
+
+$$
+\min_{u} J(\varphi, u) = \underbrace{\frac{b_1}{2} ||\varphi - \varphi_Q||_{L^2}^2}_{\text{Trajectory Tracking}} + \underbrace{\frac{b_2}{2} ||\varphi(T) - \varphi_\Omega||_{L^2}^2}_{\text{Terminal Target}} + \underbrace{\frac{b_3}{2} ||u||_{L^2}^2}_{\text{Control Energy}} + \underbrace{\kappa_{spar} ||u||_{L^1}}_{\text{Sparsity}}
+$$
+
+[cite_start]The non-differentiable $L^1$ term is handled via **Soft-Thresholding**, ensuring the control $u(x,t)$ is zero where actuation is not strictly necessary[cite: 598].
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+* [cite_start]Python 3.11+ [cite: 649]
+* RAM: ~4GB recommended for 2D simulations.
+
+### Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/YOUR_USERNAME/Viscous_Cahn_Hilliard.git](https://github.com/YOUR_USERNAME/Viscous_Cahn_Hilliard.git)
+    cd Viscous_Cahn_Hilliard
+    ```
+
+2.  **Create a virtual environment (Recommended):**
+    ```bash
+    conda create -n ch-opt python=3.11 -y
+    conda activate ch-opt
+    ```
+
+3.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+---
+
+## 💻 Usage
+
+The simulators are designed to be run from the **project root directory**.
+
+### Interactive Mode
+Run the driver script. [cite_start]You will see a "Forward Preview" first, followed by prompts to configure the optimization (weights, steps, targets)[cite: 1987].
+
+**To run the 1D Simulator:**
+```bash
+python 1d/Vch_control_1D/GD_1D.py
+
+
+**To run the 2D Simulator:**
+```bash
+python 1d/Vch_control_2D/GD2_configured.py
