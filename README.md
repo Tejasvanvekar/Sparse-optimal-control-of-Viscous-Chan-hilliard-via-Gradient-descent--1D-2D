@@ -65,7 +65,7 @@ $$
 
 ## 🚀 Installation
 
-### Prerequisites
+### Prerequisites (Min)
 * [cite_start]Python 3.11+ [cite: 649]
 * RAM: ~4GB recommended for 2D simulations.
 
@@ -100,7 +100,7 @@ Run the driver script. [cite_start]You will see a "Forward Preview" first, follo
 **To run the 1D Simulator:**
 ```bash
 python 1d/Vch_control_1D/GD_1D.py
-
+```
 
 **To run the 2D Simulator:**
 ```bash
