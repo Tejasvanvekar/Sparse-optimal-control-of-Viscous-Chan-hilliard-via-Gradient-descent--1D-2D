@@ -95,7 +95,7 @@ The non-differentiable $L^1$ term is handled via **Soft-Thresholding**, ensuring
 The simulators are designed to be run from the **project root directory**.
 
 ### Interactive Mode
-Run the driver script. [cite_start]You will see a "Forward Preview" first, followed by prompts to configure the optimization (weights, steps, targets)[cite: 1987].
+Run the driver script. [cite_start]You will see a "Forward Preview" first, followed by prompts to configure the optimization (weights, steps, targets).
 
 **To run the 1D Simulator:**
 ```bash
@@ -106,21 +106,3 @@ python 1d/Vch_control_1D/GD_1D.py
 ```bash
 python 1d/Vch_control_2D/GD2_configured.py
 ```
-**Project Structure**
-Viscous_Cahn_Hilliard/
-├── 1d/
-│   └── Vch_control_1D/
-│       ├── GD_1D.py                 # Main 1D Driver
-│       ├── Forward_solver.py        # 1D Forward Solver (Newton-Raphson)
-│       ├── backward_solver.py       # 1D Adjoint Solver
-│       ├── cost_and_function.py     # Cost calculation
-│       └── ...
-├── 2d/
-│   └── Vch_control_2D/
-│       ├── GD2_configured.py        # Main 2D Driver
-│       ├── Forward2_solver.py       # 2D Forward Solver (Sparse Matrices)
-│       ├── backward2_solver.py      # 2D Adjoint Solver
-│       ├── visualization_3d.py      # 3D Plotting & Animation
-│       └── config.py                # Pydantic Configuration Models
-├── requirements.txt
-└── README.md
