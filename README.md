@@ -15,11 +15,11 @@ This project implements a **Proximal Gradient Descent (PGD)** algorithm to steer
 
 | 1D Control Evolution | 2D Target Steering |
 |:--------------------:|:------------------:|
-| *[Place 1D GIF Here]* | *[Place 2D GIF Here]* |
-| *Steering a 1D profile to a sinusoid* | *Steering a random mixture to a central disk* |
+| ![1D Evolution](images/phi_evolution.gif) | ![2D Evolution](images/phase_separation_timelapse.gif) |
+| *Evolution of $\varphi$ under Optimal Control* | *Controlled Phase Separation* |
 
 ---
-
+**Note:** The graphics displayed above are for demonstration purposes and may differ slightly from current outputs due to code updates. All default parameters are defined in `config.py`; you can modify them directly in that file or adjust them interactively by running the main driver scripts.
 ## 🌟 Key Features
 
 * **Multi-Dimensional:** Fully supported solvers for both **1D** and **2D** domains.
@@ -106,3 +106,7 @@ python 1d/Vch_control_1D/GD_1D.py
 ```bash
 python 1d/Vch_control_2D/GD2_configured.py
 ```
+
+## 📚 References
+
+1.  P. Colli, J. Sprekels, and F. Tröltzsch, "Optimality Conditions for Sparse Optimal Control of Viscous Cahn-Hilliard Systems with Logarithmic Potential," *Applied Mathematics & Optimization*, 2024.
