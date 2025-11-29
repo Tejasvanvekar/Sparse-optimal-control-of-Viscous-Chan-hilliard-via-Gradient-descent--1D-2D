@@ -16,7 +16,7 @@ This project implements a **Proximal Gradient Descent (PGD)** algorithm to steer
 | 1D Control Evolution | 2D Target Steering |
 |:--------------------:|:------------------:|
 | ![1D Evolution](images/phi_evolution.gif) | ![2D Evolution](images/phase_separation_timelapse.gif) |
-| *Evolution of $\varphi$ under Optimal Control* | *Controlled Phase Separation* |
+| *Evolution of phi under Optimal Control* | *Controlled Phase Separation* |
 
 ---
 **Note:** The graphics displayed above are for demonstration purposes and may differ slightly from current outputs due to code updates. All default parameters are defined in `config.py`; you can modify them directly in that file or adjust them interactively by running the main driver scripts.
