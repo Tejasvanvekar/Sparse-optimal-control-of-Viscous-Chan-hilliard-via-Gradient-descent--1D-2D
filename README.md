@@ -119,12 +119,8 @@ This codebase is rigorously tested to ensure solver stability and numerical accu
     ```
 
 2.  **Run the Test Suite:**
-    Navigate to the folder 1D or 2D folder and run the test file present in each 'test cases':
-    ```bash
-    pytest
-    ```
-    *This will automatically discover and execute all test files (e.g., `test_1d_*.py` or  `test_2d_*.py`).*
-
+    Navigate to the folder 1D or 2D  and simply run the test file present in each 'test cases':(e.g., `test_1d_*.py` or  `test_2d_*.py`).
+ 
 ## 📚 References
 
 1.  P. Colli, J. Sprekels, and F. Tröltzsch, "Optimality Conditions for Sparse Optimal Control of Viscous Cahn-Hilliard Systems with Logarithmic Potential," *Applied Mathematics & Optimization*, 2024.
