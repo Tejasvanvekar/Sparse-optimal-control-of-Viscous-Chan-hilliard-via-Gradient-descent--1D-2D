@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python)
 ![SciPy](https://img.shields.io/badge/SciPy-Sparse_Solvers-blue)
 ![Status](https://img.shields.io/badge/Status-Active-success)
+![Tests](https://img.shields.io/badge/Tests-Passing-success)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 A high-performance computational framework for solving **sparse optimal control problems** governed by the **Viscous Cahn-Hilliard (vCH)** equation with a logarithmic potential.
@@ -67,7 +68,7 @@ The non-differentiable $L^1$ term is handled via **Soft-Thresholding**, ensuring
 
 ### Prerequisites (Min)
 * Python 3.11+ 
-* RAM: ~4GB recommended for 2D simulations.
+* RAM: ~4GB+ recommended for 2D simulations.
 
 ### Setup
 
@@ -106,6 +107,23 @@ python 1d/Vch_control_1D/GD_1D.py
 ```bash
 python 1d/Vch_control_2D/GD2_configured.py
 ```
+
+## 🧪 Testing & Verification
+
+This codebase is rigorously tested to ensure solver stability and numerical accuracy. We use **pytest** to validate the Newton solvers, discrete gradients, and optimization routines.
+
+### Running Tests
+1.  **Install pytest** (if not already installed):
+    ```bash
+    pip install pytest
+    ```
+
+2.  **Run the Test Suite:**
+    Navigate to the folder 1D or 2D folder and run the test file present in each 'test cases':
+    ```bash
+    pytest
+    ```
+    *This will automatically discover and execute all test files (e.g., `test_1d_*.py` or  `test_2d_*.py`).*
 
 ## 📚 References
 
